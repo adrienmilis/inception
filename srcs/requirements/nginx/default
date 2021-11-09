@@ -36,6 +36,10 @@ server {
 	ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;	# location of ssl key
 
 	ssl_protocols TLSv1.2 TLSv1.3;
+	ssl_prefer_server_ciphers on;	# we use our cryptographic algorithms
+	# set of secure cryptographic algorithms to use
+	ssl_ciphers ECDH+AESGCM:ECDH+CHACHA20:ECDH+AES256:ECDH+AES128:!aNULL:!SHA1:!AESCCM;
+
 
 	# server_name amilis.42.fr www.amilis.42.fr
 	

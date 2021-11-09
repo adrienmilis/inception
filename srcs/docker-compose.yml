@@ -3,21 +3,28 @@ version: "3.7"
 services:
   # <service_name>:
   #   build: <path_to_directory_of_dockerfile>
+  #   image: <image_name>
   #   volumes:
   #     - <path_to_volume>:<path_to_volume_in_container>
   #   ports:
         # - <host_port>:<container_port>
-  #   depends_on: <other_service>
+  #   depends_on:
+  #     - "<other_service>"
   #   restart: on-failure
 
   nginx:
     build: ./requirements/nginx/
+    image: nginx
     # volumes: 
     ports:
       - 80:80 # host:container
       - 443:443
     restart: on-failure
 
-  # mariadb:
-  #   build: ./requirements/mariadb
-  #   restart: on-failure
+  mariadb:
+    build: ./requirements/mariadb
+    image: mariadb
+    # volumes:
+    restart: on-failure
+    depends_on: 
+      - "nginx"
