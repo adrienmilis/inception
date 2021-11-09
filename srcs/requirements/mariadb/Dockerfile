@@ -9,6 +9,10 @@ RUN apt-get -y update \
         && apt-get -y install mariadb-server mariadb-client \
         && service mysql start
 
+ADD ./create_wordpress_db.sql /
+RUN mysql < /create_wordpress_db.sql \
+        && rm -rf /create_wordpress_db.sql
+
 EXPOSE 3306
 
 CMD ["mysqld"]

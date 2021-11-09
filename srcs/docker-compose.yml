@@ -7,7 +7,7 @@ services:
   #   volumes:
   #     - <path_to_volume>:<path_to_volume_in_container>
   #   ports:
-        # - <host_port>:<container_port>
+  #       - <host_port>:<container_port>
   #   depends_on:
   #     - "<other_service>"
   #   restart: on-failure
@@ -24,7 +24,8 @@ services:
   mariadb:
     build: ./requirements/mariadb
     image: mariadb
-    # volumes:
+    volumes:
+      - type: bind
+        source: /Users/amilis/Documents/projects/c5/inception/git_inception/tmp_vol_db
+        target: /var/lib/mysql
     restart: on-failure
-    depends_on: 
-      - "nginx"
