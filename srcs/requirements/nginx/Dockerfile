@@ -5,18 +5,13 @@ LABEL name="amilis" \
         mail="amilis@student.s19.be"
 
 RUN apt-get -y update \
-        && apt-get -y install nginx \
         && apt-get -y upgrade \
+        && apt-get -y install apt-utils \
+        && apt-get -y install nginx \
         && apt-get -y install openssl \
         && openssl req -x509 -nodes -days 365 -subj "/C=BE/ST=BXL/O=19, Inc./CN=localhost" -addext "subjectAltName=DNS:localhost" -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
 
 ADD ./default /etc/nginx/sites-available/
-
-
-# # ADD nginx config file
-# RUN rm /etc/nginx/sites-available/default \
-#         && rm /var/www/html/index.nginx-debian.html
-# ADD srcs/default_autoindex_on /etc/nginx/sites-available/default
 
 EXPOSE 80 443
 

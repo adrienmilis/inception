@@ -1,4 +1,4 @@
-CREATE DATABASE wordpress;
+-- CREATE DATABASE wordpress;
 CREATE USER wpuser@localhost IDENTIFIED BY 'wpuserpass';
 GRANT ALL PRIVILEGES ON wordpress.* TO wpuser@localhost;
 /* grant all privileges on all wordpress tables*/

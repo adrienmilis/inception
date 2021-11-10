@@ -12,20 +12,42 @@ services:
   #     - "<other_service>"
   #   restart: on-failure
 
-  nginx:
-    build: ./requirements/nginx/
-    image: nginx
-    # volumes: 
-    ports:
-      - 80:80 # host:container
-      - 443:443
-    restart: on-failure
+  # nginx:
+  #   build: ./requirements/nginx/
+  #   # image: nginx
+  #   ports:
+  #     - 80:80 # host:container
+  #     - 443:443
+  #   restart: on-failure
+  #   init: true
 
-  mariadb:
-    build: ./requirements/mariadb
-    image: mariadb
+  # mariadb:
+  #   build: ./requirements/mariadb
+  #   # image: mariadb
+  #   volumes:
+  #     - db_volume:/var/lib/mysql
+  #   restart: on-failure
+  #   init: true
+
+  wordpress:
+    build: ./requirements/wordpress
+    # image: wordpress
     volumes:
-      - type: bind
-        source: /Users/amilis/Documents/projects/c5/inception/git_inception/tmp_vol_db
-        target: /var/lib/mysql
+      - wordpress_data:/var/www/html
     restart: on-failure
+    init: true
+
+volumes:
+#   db_volume:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: /Users/amilis/Documents/projects/c5/inception/inception/tmp_vol_db
+
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /Users/amilis/Documents/projects/c5/inception/inception/tmp_vol_wordpress
