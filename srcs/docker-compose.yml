@@ -21,6 +21,8 @@ services:
     volumes:
       - wordpress_data:/var/www/html
     init: true
+    container_name: nginx
+
 
   mariadb:
     build: ./requirements/mariadb
@@ -30,13 +32,15 @@ services:
     environment:
       - ROOT_PASS=r11tt11r 
     init: true
+    container_name: mariadb
 
-  wordpress:
-    build: ./requirements/wordpress
+  php:
+    build: ./requirements/php
     volumes:
       - wordpress_data:/var/www/html
     restart: on-failure
     init: true
+    container_name: php
 
 volumes:
   db_volume:

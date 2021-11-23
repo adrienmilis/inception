@@ -1,2 +1,2 @@
 all:
-	docker-compos
+	docker-compose up
