@@ -14,24 +14,25 @@ services:
 
   nginx:
     build: ./requirements/nginx/
-    # image: nginx
     ports:
       - 80:80 # host:container
       - 443:443
     restart: on-failure
+    volumes:
+      - wordpress_data:/var/www/html
     init: true
 
   mariadb:
     build: ./requirements/mariadb
-    # image: mariadb
     volumes:
       - db_volume:/var/lib/mysql
     restart: on-failure
+    environment:
+      - ROOT_PASS=r11tt11r 
     init: true
 
   wordpress:
     build: ./requirements/wordpress
-    # image: wordpress
     volumes:
       - wordpress_data:/var/www/html
     restart: on-failure
